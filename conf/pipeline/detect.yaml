@@ -1,0 +1,4 @@
+# @package _global_
+detect:
+  enabled: true
+  confidence: 0.3

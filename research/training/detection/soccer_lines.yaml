@@ -1,0 +1,33 @@
+# Dataset root relative to this YAML file.
+path: .
+train: images/train
+val: images/valid
+test: images/test
+
+names:
+  0: Side line top
+  1: Side line bottom
+  2: Side line left
+  3: Side line right
+  4: Middle line
+  5: Circle central
+  6: Circle left
+  7: Circle right
+  8: Big rect. left top
+  9: Big rect. left main
+  10: Big rect. left bottom
+  11: Big rect. right top
+  12: Big rect. right main
+  13: Big rect. right bottom
+  14: Small rect. left top
+  15: Small rect. left main
+  16: Small rect. left bottom
+  17: Small rect. right top
+  18: Small rect. right main
+  19: Small rect. right bottom
+  20: Goal left post left
+  21: Goal left post right
+  22: Goal left crossbar
+  23: Goal right post left
+  24: Goal right post right
+  25: Goal right crossbar

@@ -1,0 +1,10 @@
+# @package _global_
+reid:
+  enabled: false                              # set true after downloading weights
+  weights:    weights/osnet_x1_0_sportsreid.pth.tar
+  img_size:   [256, 128]                     # H x W, standard ReID crop size
+  threshold:  0.65                           # cosine similarity cutoff for ID match
+  max_age:    120                            # frames to keep lost track in gallery
+  update_interval: 30                        # refresh active gallery every N frames
+  emb_ema:    0.15                           # EMA weight on gallery update
+  min_crop_h: 40                             # skip ReID for crops shorter than this (px) — avoids noisy embeddings for distant players

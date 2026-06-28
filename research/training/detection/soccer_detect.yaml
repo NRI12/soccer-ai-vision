@@ -1,0 +1,15 @@
+# Dataset root relative to this YAML file.
+path: data
+train: images/train
+val: images/valid
+test: images/test
+
+names:
+  0: Ball
+  1: Player team left
+  2: Player team right
+  3: Goalkeeper team left
+  4: Goalkeeper team right
+  5: Main referee
+  6: Side referee
+  7: Staff members

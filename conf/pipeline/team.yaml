@@ -1,0 +1,6 @@
+# @package _global_
+team:
+  enabled: true
+  # Detector (SoccerNet 8-class) đã encode team-left / team-right trực tiếp.
+  # classify_teams_from_model() chỉ remap class_ids → {0, 1, 2}.
+  mode: from_model

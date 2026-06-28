@@ -1,0 +1,6 @@
+# @package _global_
+filter:
+  enabled: true
+  ball_pad_px: 10
+  nms_threshold: 0.5
+  nms_class_agnostic: true

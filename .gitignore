@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv/
+
+# IDE / editor local settings
+.vscode/
+.idea/
+.claude/
+
+# Pipeline output
+output/
+outputs/
+
+# Video / media files (large)
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.webm
+
+# Model weights & checkpoints (large binaries)
+*.pt
+*.pth
+*.pth.tar
+*.tar
+*.onnx
+*.bin
+
+# Training run artifacts (plots, batch images, metrics)
+research/runs/
+finetunning_soccernet/runs/
+finetunning_soccernet/logs/
+
+# External cloned repos (large, fetched separately)
+research/nbjw/
+research/sportsreid/
+
+# Raw datasets
+data/
+research/datasets/
+
+# Hydra runtime outputs
+hydra_outputs/
+multirun/
+
+# Misc
+*.docx
+*.zip
+
+# Large weight binaries (no extension)
+weights/SV_kp
+weights/SV_lines
+
+# weights folder entirely
+weights/

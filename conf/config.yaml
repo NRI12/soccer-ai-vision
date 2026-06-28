@@ -1,0 +1,38 @@
+defaults:
+  - pipeline/detect
+  - pipeline/filter
+  - pipeline/track
+  - pipeline/team
+  - pipeline/pitch
+  - pipeline/annotate
+  - pipeline/reid
+  - _self_
+
+video:
+  source_path: data/08fd33_0.mp4
+  output_path: output/result.mp4
+  stride: 1
+
+models:
+  device: "auto"  # "auto" = GPU nếu có, fallback CPU; hoặc "0", "cpu"
+  player_detection:
+    path: weights/player_detection.pt
+  field_detection:
+    path: research/runs/pose/train/weights/best.pt
+
+player_stats:
+  enabled: true
+  output_dir: output/player_stats  # per-player overlay PNGs + player_stats.json
+  export_videos: true               # export one highlight video per player (slow)
+  min_frames_for_video: 280        # skip players with fewer detected frames
+
+# Class IDs của SoccerNet finetuned weights (8 classes).
+class_ids:
+  ball: 0
+  player_left: 1
+  player_right: 2
+  goalkeeper_left: 3
+  goalkeeper_right: 4
+  main_referee: 5
+  side_referee: 6
+  staff: 7

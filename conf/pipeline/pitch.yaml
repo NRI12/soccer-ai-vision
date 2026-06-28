@@ -1,0 +1,10 @@
+# @package _global_
+pitch:
+  enabled: true
+  nbjw_weights_kp: weights/SV_kp
+  nbjw_weights_lines: weights/SV_lines
+  nbjw_kp_threshold: 0.1486
+  nbjw_line_threshold: 0.3880
+  nbjw_interval: 15      # run calibration every N frames, reuse last for in-between
+  ema_alpha: 0.4       # EMA weight: 0.2=very smooth, 0.6=more responsive
+  pos_max_age: 30      # frames before forgetting a lost player

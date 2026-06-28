@@ -1,0 +1,32 @@
+# @package _global_
+annotate:
+  enabled: true
+  mode: advanced  # "basic" or "advanced"
+
+  colors:
+    team_1: '#00BFFF'
+    team_2: '#FF1493'
+    referee: '#FFD700'
+    ball: '#FFD700'
+    text: '#000000'
+
+  ellipse:
+    thickness: 2
+
+  triangle:
+    base: 20
+    height: 17
+    outline_thickness: 1
+
+  box:
+    thickness: 2
+
+  label:
+    text_position: TOP_CENTER
+
+  radar:
+    enabled: true
+    ball_radius: 14
+    player_radius: 22
+    show_ids: true  # draw tracker ID numbers above player dots on minimap
+
