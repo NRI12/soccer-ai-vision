@@ -1,5 +1,5 @@
 [project]
-name = "soccer-ai"
+name = "soccer-ai-vision"
 version = "0.1.0"
 description = "Soccer AI video analysis pipeline"
 readme = "README.md"
