@@ -8,6 +8,8 @@ Pipeline phân tích video bóng đá: phát hiện cầu thủ/bóng, tracking,
 |---|---|
 | ![result](research/results/detection_soccernet/train/val_batch0_pred.jpg) | ![stats](docs/samples/player_0001_team0.png) |
 
+**Video output đầy đủ:** [result.mp4 (68MB) — GitHub Releases v0.1.0](https://github.com/NRI12/soccer-ai-vision/releases/tag/v0.1.0)
+
 ## Tính năng
 
 - **Detection** — YOLO11 finetune trên SoccerNet (8 lớp: ball, player trái/phải, thủ môn, trọng tài, staff)
