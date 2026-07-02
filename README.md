@@ -4,11 +4,13 @@ Pipeline phân tích video bóng đá: phát hiện cầu thủ/bóng, tracking,
 
 ## Demo
 
-| Inference output | Player stats overlay |
-|---|---|
-| ![result](research/results/detection_soccernet/train/val_batch0_pred.jpg) | ![stats](docs/samples/player_0001_team0.png) |
+![demo](docs/samples/demo.gif)
 
-**Video output đầy đủ:** [result.mp4 (68MB) — GitHub Releases v0.1.0](https://github.com/NRI12/soccer-ai-vision/releases/tag/v0.1.0)
+**Video đầy đủ (68MB):** [result.mp4 — GitHub Releases v0.1.0](https://github.com/NRI12/soccer-ai-vision/releases/tag/v0.1.0)
+
+| Player stats overlay — Team 0 | Player stats overlay — Team 1 |
+|---|---|
+| ![stats0](docs/samples/player_0001_team0.png) | ![stats1](docs/samples/player_0009_team1.png) |
 
 ## Tính năng
 
