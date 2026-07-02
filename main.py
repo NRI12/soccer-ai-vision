@@ -116,7 +116,7 @@ def main(cfg: DictConfig) -> None:
     )
 
     # --- Video info + tracker (built once with correct effective fps) ---
-    from soccer_ai.detector import build_tracker
+    from soccer_ai.detector import build_tracker, KMeansTeamClassifier
     from soccer_ai.stats import PlayerStatsTracker
 
     video_info = sv.VideoInfo.from_video_path(source_path)
@@ -132,6 +132,14 @@ def main(cfg: DictConfig) -> None:
         PlayerStatsTracker(fps=video_info.fps, stride=cfg.video.stride)
         if cfg.player_stats.enabled else None
     )
+
+    team_classifier = None
+    if cfg.team.enabled and getattr(cfg.team, "mode", "from_model") == "from_color":
+        team_classifier = KMeansTeamClassifier(
+            warmup_frames=int(cfg.team.get("kmeans_warmup_frames", 60)),
+            min_crop_h=int(cfg.team.get("kmeans_min_crop_h", 30)),
+        )
+        log.info("Team classifier: KMeans from_color (warmup=%d frames)", team_classifier.warmup_frames)
 
     reid = None
     if cfg.reid.enabled:
@@ -169,6 +177,7 @@ def main(cfg: DictConfig) -> None:
                 pos_smoother=pos_smoother,
                 calibrator=calibrator,
                 reid=reid,
+                team_classifier=team_classifier,
             )
             if player_stats_tracker is not None:
                 player_stats_tracker.update(data, i, frame)

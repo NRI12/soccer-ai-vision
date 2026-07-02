@@ -158,7 +158,10 @@ class PlayerStatsTracker:
             return
 
         for old_file in output_dir.glob("*_highlight.mp4"):
-            old_file.unlink(missing_ok=True)
+            try:
+                old_file.unlink(missing_ok=True)
+            except PermissionError:
+                log.warning("Cannot delete locked file %s; will attempt to overwrite", old_file.name)
 
         colors = cfg.annotate.colors
         team_hex = {0: colors.team_1, 1: colors.team_2, 2: colors.referee}
@@ -176,13 +179,14 @@ class PlayerStatsTracker:
         fh = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
         fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-        writers: dict[int, cv2.VideoWriter] = {
-            tid: cv2.VideoWriter(
-                str(output_dir / f"player_{tid:04d}_team{s['team']}_highlight.mp4"),
-                fourcc, fps, (fw, fh),
-            )
-            for tid, s in eligible.items()
-        }
+        writers: dict[int, cv2.VideoWriter] = {}
+        for tid, s in eligible.items():
+            path = str(output_dir / f"player_{tid:04d}_team{s['team']}_highlight.mp4")
+            w = cv2.VideoWriter(path, fourcc, fps, (fw, fh))
+            if w.isOpened():
+                writers[tid] = w
+            else:
+                log.warning("Cannot write highlight for player %d (file locked?); skipping", tid)
 
         frame_real, frame_strided = -1, -1
         while True:

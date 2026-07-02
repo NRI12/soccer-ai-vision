@@ -1,0 +1,310 @@
+Show configuration
+adam:
+  beta1: 0.9
+  beta2: 0.999
+cuhk03:
+  classic_split: False
+  labeled_images: False
+data:
+  combineall: False
+  eval_metric: soccernetv3
+  height: 256
+  k_tfm: 1
+  load_train_targets: False
+  norm_mean: [0.485, 0.456, 0.406]
+  norm_std: [0.229, 0.224, 0.225]
+  root: datasets
+  save_dir: logs/eval_ckpt
+  sources: ['soccernetv3']
+  split_id: 0
+  targets: ['soccernetv3', 'soccernetv3_test', 'soccernetv3_challenge']
+  transforms: ['random_flip', 'random_crop', 'random_patch', 'random_erase']
+  type: image
+  width: 128
+  workers: 16
+loss:
+  name: triplet
+  softmax:
+    label_smooth: True
+  triplet:
+    bottomk: 1
+    margin: 0.5
+    topk: 1
+    weight_cc: 0.5
+    weight_t: 0.9
+    weight_tc: 0.0
+    weight_x: 0.5
+market1501:
+  use_500k_distractors: False
+model:
+  load_weights: /workspace/osnet_reid/checkpoints/checkpoint.pth
+  name: osnet_x1_0
+  pretrained: True
+  resume: 
+rmsprop:
+  alpha: 0.99
+sampler:
+  num_cams: 1
+  num_datasets: 1
+  num_instances: 8
+  train_sampler: RandomIdentitySampler_Hierarchical
+  train_sampler_t: RandomIdentitySampler
+sgd:
+  dampening: 0.0
+  momentum: 0.9
+  nesterov: False
+soccernetv3:
+  training_subset: 1.0
+test:
+  batch_size: 512
+  dist_metric: euclidean
+  eval_freq: 5
+  evaluate: True
+  export_ranking_results: True
+  normalize_feature: False
+  ranks: [1, 5, 10]
+  rerank: False
+  start_eval: 10
+  visrank: False
+  visrank_topk: 10
+train:
+  amp: True
+  base_lr_mult: 0.1
+  batch_size: 256
+  cudnn_benchmark: True
+  fixbase_epoch: 0
+  gamma: 0.1
+  lr: 0.0003
+  lr_scheduler: multi_step
+  max_epoch: 20
+  min_lr: 1e-06
+  new_layers: ['classifier']
+  open_layers: ['classifier']
+  optim: adam
+  print_freq: 50
+  seed: 1
+  staged_lr: False
+  start_epoch: 0
+  stepsize: [15, 18]
+  warmup_epochs: 0
+  warmup_lr: 0.0
+  warmup_steps: 0
+  weight_decay: 0.0005
+use_gpu: True
+video:
+  pooling_method: avg
+  sample_method: evenly
+  seq_len: 15
+
+Collecting env info ...
+** System info **
+PyTorch version: 2.6.0+cu124
+Is debug build: False
+CUDA used to build PyTorch: 12.4
+ROCM used to build PyTorch: N/A
+
+OS: Ubuntu 24.04.4 LTS (x86_64)
+GCC version: (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Clang version: Could not collect
+CMake version: version 3.28.3
+Libc version: glibc-2.39
+
+Python version: 3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0] (64-bit runtime)
+Python platform: Linux-5.15.0-52-generic-x86_64-with-glibc2.39
+Is CUDA available: True
+CUDA runtime version: 13.1.115
+CUDA_MODULE_LOADING set to: LAZY
+GPU models and configuration: GPU 0: NVIDIA GeForce RTX 3090
+Nvidia driver version: 590.48.01
+cuDNN version: Probably one of the following:
+/usr/lib/x86_64-linux-gnu/libcudnn.so.9.17.1
+/usr/lib/x86_64-linux-gnu/libcudnn_adv.so.9.17.1
+/usr/lib/x86_64-linux-gnu/libcudnn_cnn.so.9.17.1
+/usr/lib/x86_64-linux-gnu/libcudnn_engines_precompiled.so.9.17.1
+/usr/lib/x86_64-linux-gnu/libcudnn_engines_runtime_compiled.so.9.17.1
+/usr/lib/x86_64-linux-gnu/libcudnn_graph.so.9.17.1
+/usr/lib/x86_64-linux-gnu/libcudnn_heuristic.so.9.17.1
+/usr/lib/x86_64-linux-gnu/libcudnn_ops.so.9.17.1
+HIP runtime version: N/A
+MIOpen runtime version: N/A
+Is XNNPACK available: True
+
+CPU:
+Architecture:                    x86_64
+CPU op-mode(s):                  32-bit, 64-bit
+Address sizes:                   48 bits physical, 48 bits virtual
+Byte Order:                      Little Endian
+CPU(s):                          256
+On-line CPU(s) list:             0-254
+Off-line CPU(s) list:            255
+Vendor ID:                       AuthenticAMD
+Model name:                      AMD EPYC 7B13 64-Core Processor
+CPU family:                      25
+Model:                           1
+Thread(s) per core:              2
+Core(s) per socket:              64
+Socket(s):                       2
+Stepping:                        1
+Frequency boost:                 enabled
+CPU(s) scaling MHz:              55%
+CPU max MHz:                     3539.7939
+CPU min MHz:                     0.0000
+BogoMIPS:                        4499.88
+Flags:                           fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 invpcid_single hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 invpcid cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload vgif v_spec_ctrl umip pku ospke vaes vpclmulqdq rdpid overflow_recov succor smca
+Virtualization:                  AMD-V
+L1d cache:                       4 MiB (128 instances)
+L1i cache:                       4 MiB (128 instances)
+L2 cache:                        64 MiB (128 instances)
+L3 cache:                        512 MiB (16 instances)
+NUMA node(s):                    2
+NUMA node0 CPU(s):               0-63,128-191
+NUMA node1 CPU(s):               64-127,192-254
+Vulnerability Itlb multihit:     Not affected
+Vulnerability L1tf:              Not affected
+Vulnerability Mds:               Not affected
+Vulnerability Meltdown:          Not affected
+Vulnerability Mmio stale data:   Not affected
+Vulnerability Retbleed:          Not affected
+Vulnerability Spec store bypass: Mitigation; Speculative Store Bypass disabled via prctl and seccomp
+Vulnerability Spectre v1:        Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:        Mitigation; Retpolines, IBPB conditional, IBRS_FW, STIBP always-on, RSB filling, PBRSB-eIBRS Not affected
+Vulnerability Srbds:             Not affected
+Vulnerability Tsx async abort:   Not affected
+
+Versions of relevant libraries:
+[pip3] flake8==7.3.0
+[pip3] numpy==2.4.3
+[pip3] nvidia-cublas-cu12==12.4.5.8
+[pip3] nvidia-cuda-cupti-cu12==12.4.127
+[pip3] nvidia-cuda-nvrtc-cu12==12.4.127
+[pip3] nvidia-cuda-runtime-cu12==12.4.127
+[pip3] nvidia-cudnn-cu12==9.1.0.70
+[pip3] nvidia-cufft-cu12==11.2.1.3
+[pip3] nvidia-curand-cu12==10.3.5.147
+[pip3] nvidia-cusolver-cu12==11.6.1.9
+[pip3] nvidia-cusparse-cu12==12.3.1.170
+[pip3] nvidia-cusparselt-cu12==0.6.2
+[pip3] nvidia-nccl-cu12==2.21.5
+[pip3] nvidia-nvjitlink-cu12==12.4.127
+[pip3] nvidia-nvtx-cu12==12.4.127
+[pip3] torch==2.6.0+cu124
+[pip3] torchvision==0.21.0+cu124
+[pip3] triton==3.2.0
+[conda] Could not collect
+        Pillow (12.1.1)
+
+Building train transforms ...
++ resize to 256x128
++ random flip
++ random crop (enlarge to 288x144 and crop 256x128)
++ random patch
++ to torch tensor of range [0, 1]
++ normalization (mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
++ random erase
+Building test transforms ...
++ resize to 256x128
++ to torch tensor of range [0, 1]
++ normalization (mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+=> Loading train (source) dataset
+SoccerNet valid set was already downloaded and unzipped at /workspace/osnet_reid/benchmarks/baseline/datasets/soccernetv3/reid/valid.
+SoccerNet train set was already downloaded and unzipped at /workspace/osnet_reid/benchmarks/baseline/datasets/soccernetv3/reid/train.
+=> Loaded Soccernetv3
+  ----------------------------------------
+  subset   | # ids | # images | # cameras
+  ----------------------------------------
+  train    | 161443 |   248234 |      9189
+  query    | 11638 |    11638 |      1751
+  gallery  | 29534 |    34355 |      1751
+  ----------------------------------------
+=> Loading test (target) dataset
+SoccerNet valid set was already downloaded and unzipped at /workspace/osnet_reid/benchmarks/baseline/datasets/soccernetv3/reid/valid.
+SoccerNet train set was already downloaded and unzipped at /workspace/osnet_reid/benchmarks/baseline/datasets/soccernetv3/reid/train.
+=> Loaded Soccernetv3
+  ----------------------------------------
+  subset   | # ids | # images | # cameras
+  ----------------------------------------
+  train    | 161443 |   248234 |      9189
+  query    | 11638 |    11638 |      1751
+  gallery  | 29534 |    34355 |      1751
+  ----------------------------------------
+SoccerNet valid set was already downloaded and unzipped at /workspace/osnet_reid/benchmarks/baseline/datasets/soccernetv3/reid/valid.
+SoccerNet train set was already downloaded and unzipped at /workspace/osnet_reid/benchmarks/baseline/datasets/soccernetv3/reid/train.
+SoccerNet test set was already downloaded and unzipped at /workspace/osnet_reid/benchmarks/baseline/datasets/soccernetv3/reid/test.
+=> Loaded Soccernetv3Test
+  ----------------------------------------
+  subset   | # ids | # images | # cameras
+  ----------------------------------------
+  train    |     0 |        0 |         0
+  query    | 11777 |    11777 |      1715
+  gallery  | 30059 |    34989 |      1715
+  ----------------------------------------
+SoccerNet test set was already downloaded and unzipped at /workspace/osnet_reid/benchmarks/baseline/datasets/soccernetv3/reid/test.
+Unzipping challenge set to '/workspace/osnet_reid/benchmarks/baseline/datasets/soccernetv3/reid' ...
+Deleting challenge set zip file at '/workspace/osnet_reid/benchmarks/baseline/datasets/soccernetv3/reid/challenge.zip'...
+SoccerNet challenge set is ready.
+=> Loaded Soccernetv3Challenge
+  ----------------------------------------
+  subset   | # ids | # images | # cameras
+  ----------------------------------------
+  train    |     0 |        0 |         0
+  query    |  9021 |     9021 |      1310
+  gallery  | 26082 |    26082 |      1310
+  ----------------------------------------
+SoccerNet challenge set was already downloaded and unzipped at /workspace/osnet_reid/benchmarks/baseline/datasets/soccernetv3/reid/challenge.
+
+
+  **************** Summary ****************
+  source            : ['soccernetv3']
+  # source datasets : 1
+  # source ids      : 161443
+  # source images   : 248234
+  # source cameras  : 9189
+  target            : ['soccernetv3', 'soccernetv3_test', 'soccernetv3_challenge']
+  *****************************************
+
+
+Building model: osnet_x1_0
+Successfully loaded imagenet pretrained weights from "/root/.cache/torch/checkpoints/osnet_x1_0_imagenet.pth"
+** The following layers are discarded due to unmatched keys or layer size: ['classifier.weight', 'classifier.bias']
+Model complexity: params=2,193,616 flops=978,878,352
+Successfully loaded pretrained weights from "/workspace/osnet_reid/checkpoints/checkpoint.pth"
+Building triplet-engine for image-reid
+##### Evaluating soccernetv3 (source) #####
+Extracting features from query set ...
+Done, obtained 11638-by-512 matrix
+Extracting features from gallery set ...
+Done, obtained 34355-by-512 matrix
+Speed: 0.0501 sec/batch
+Computing distance matrix with metric=euclidean ...
+Exporting ranking results to 'logs/eval_ckpt/ranking_results_soccernetv3_2026-05-27_00_18_07_826.json' for external evaluation...
+Computing CMC and mAP ...
+** Results **
+mAP: 83.7%
+CMC curve
+Rank-1  : 78.5%
+Rank-5  : 0.0%
+Rank-10 : 0.0%
+##### Evaluating soccernetv3_test (target) #####
+Extracting features from query set ...
+Done, obtained 11777-by-512 matrix
+Extracting features from gallery set ...
+Done, obtained 34989-by-512 matrix
+Speed: 0.0221 sec/batch
+Computing distance matrix with metric=euclidean ...
+Exporting ranking results to 'logs/eval_ckpt/ranking_results_soccernetv3_test_2026-05-27_00_19_24_245.json' for external evaluation...
+Computing CMC and mAP ...
+** Results **
+mAP: 83.4%
+CMC curve
+Rank-1  : 78.0%
+Rank-5  : 0.0%
+Rank-10 : 0.0%
+##### Evaluating soccernetv3_challenge (target) #####
+Extracting features from query set ...
+Done, obtained 9021-by-512 matrix
+Extracting features from gallery set ...
+Done, obtained 26082-by-512 matrix
+Speed: 0.0397 sec/batch
+Computing distance matrix with metric=euclidean ...
+Exporting ranking results to 'logs/eval_ckpt/ranking_results_soccernetv3_challenge_2026-05-27_00_20_35_331.json' for external evaluation...
+Couldn't compute CMC and mAP because of hidden identity labels.

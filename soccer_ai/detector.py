@@ -24,8 +24,10 @@ After classify_teams():
 from __future__ import annotations
 
 import logging
+from collections import defaultdict
 from typing import Any
 
+import cv2
 import numpy as np
 import supervision as sv
 from omegaconf import DictConfig
@@ -130,6 +132,135 @@ def track(data: dict[str, Any], tracker: sv.ByteTrack) -> dict[str, Any]:
 
 # Remapped class IDs: referee after filter stage
 _REFEREE_CLASS = 3
+
+
+class KMeansTeamClassifier:
+    """Phân loại team cầu thủ bằng màu áo (KMeans k=2 trên không gian LAB).
+
+    Giai đoạn warmup: tích lũy đặc trưng màu từ crop vùng áo.
+    Sau warmup: fit KMeans một lần, sau đó dùng tracker_id để giữ nhãn
+    ổn định; track mới được gán về cluster center gần nhất.
+    """
+
+    _MAX_BUFFER = 4000
+
+    def __init__(self, warmup_frames: int = 60, min_crop_h: int = 30) -> None:
+        self.warmup_frames = warmup_frames
+        self.min_crop_h = min_crop_h
+        self._buffer: list[tuple[int, np.ndarray]] = []
+        self._tracker_teams: dict[int, int] = {}
+        self._centers: np.ndarray | None = None  # shape (2, 3) LAB
+        self._fitted = False
+
+    def _jersey_feature(
+        self, frame: np.ndarray, x1: int, y1: int, x2: int, y2: int
+    ) -> np.ndarray | None:
+        h, w = y2 - y1, x2 - x1
+        if h < self.min_crop_h or w < 10:
+            return None
+        yt = y1 + int(h * 0.15)
+        yb = y1 + int(h * 0.55)
+        xl = x1 + int(w * 0.20)
+        xr = x1 + int(w * 0.80)
+        crop = frame[yt:yb, xl:xr]
+        if crop.size == 0:
+            return None
+        lab = cv2.cvtColor(crop, cv2.COLOR_BGR2LAB)
+        return lab.reshape(-1, 3).mean(axis=0).astype(np.float32)
+
+    def _fit(self) -> None:
+        from sklearn.cluster import KMeans
+        feats = np.stack([f for _, f in self._buffer])
+        tids = [t for t, _ in self._buffer]
+        km = KMeans(n_clusters=2, n_init=10, random_state=0).fit(feats)
+        self._centers = km.cluster_centers_
+        votes: dict[int, list[int]] = defaultdict(list)
+        for tid, lbl in zip(tids, km.labels_):
+            votes[tid].append(int(lbl))
+        self._tracker_teams = {
+            tid: int(np.bincount(np.array(vs)).argmax())
+            for tid, vs in votes.items()
+        }
+        self._fitted = True
+        log.info(
+            "KMeansTeamClassifier fitted: %d samples, %d trackers, centres=%s",
+            len(self._buffer),
+            len(self._tracker_teams),
+            self._centers.round(1).tolist(),
+        )
+
+    def classify(self, frame: np.ndarray, detections: sv.Detections) -> np.ndarray:
+        """Trả về mảng nhãn team (0 hoặc 1) tương ứng với mỗi detection."""
+        n = len(detections)
+        if n == 0:
+            return np.zeros(0, dtype=int)
+
+        tids = (
+            detections.tracker_id.tolist()
+            if detections.tracker_id is not None
+            else [None] * n
+        )
+
+        # Tích lũy đặc trưng
+        for i, (xyxy, tid) in enumerate(zip(detections.xyxy, tids)):
+            if len(self._buffer) >= self._MAX_BUFFER:
+                break
+            x1, y1, x2, y2 = map(int, xyxy)
+            feat = self._jersey_feature(frame, x1, y1, x2, y2)
+            if feat is not None:
+                self._buffer.append((tid if tid is not None else -(i + 1), feat))
+
+        if not self._fitted and len(self._buffer) >= max(10, self.warmup_frames // 2):
+            self._fit()
+
+        teams = np.zeros(n, dtype=int)
+        if not self._fitted:
+            return teams
+
+        for i, (xyxy, tid) in enumerate(zip(detections.xyxy, tids)):
+            if tid is not None and tid in self._tracker_teams:
+                teams[i] = self._tracker_teams[tid]
+                continue
+            x1, y1, x2, y2 = map(int, xyxy)
+            feat = self._jersey_feature(frame, x1, y1, x2, y2)
+            if feat is not None:
+                teams[i] = int(np.argmin(np.linalg.norm(self._centers - feat, axis=1)))
+                if tid is not None:
+                    self._tracker_teams[tid] = teams[i]
+
+        return teams
+
+
+def classify_teams_kmeans(
+    data: dict[str, Any], classifier: KMeansTeamClassifier
+) -> dict[str, Any]:
+    """Phân loại team bằng KMeans màu áo; referees vẫn giữ class_id=2."""
+    frame = data["frame"]
+    all_detections = data["all_detections"]
+    cid = all_detections.class_id.astype(int)
+
+    players_mask = (cid == 1) | (cid == 2)
+    ref_mask = cid == _REFEREE_CLASS
+
+    players_detections = all_detections[players_mask]
+    referees_detections = all_detections[ref_mask]
+
+    if len(players_detections) > 0:
+        players_detections.class_id = classifier.classify(frame, players_detections)
+
+    if len(referees_detections) > 0:
+        referees_detections.class_id = np.full(len(referees_detections), 2, dtype=int)
+
+    merged = sv.Detections.merge([players_detections, referees_detections])
+    merged.class_id = merged.class_id.astype(int)
+
+    if merged.tracker_id is not None:
+        data["labels"] = [str(tid) for tid in merged.tracker_id]
+
+    data["all_detections"] = merged
+    data["players_detections"] = players_detections
+    data["referees_detections"] = referees_detections
+    return data
 
 
 def classify_teams(data: dict[str, Any]) -> dict[str, Any]:

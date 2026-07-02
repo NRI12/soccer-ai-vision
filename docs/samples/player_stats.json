@@ -1,0 +1,302 @@
+[
+  {
+    "tracker_id": 1,
+    "team": 0,
+    "num_frames": 747,
+    "total_distance_m": 70.8,
+    "max_speed_ms": 9.99,
+    "avg_speed_ms": 2.43,
+    "max_speed_kmh": 36.0,
+    "avg_speed_kmh": 8.7
+  },
+  {
+    "tracker_id": 2,
+    "team": 1,
+    "num_frames": 82,
+    "total_distance_m": 11.5,
+    "max_speed_ms": 9.24,
+    "avg_speed_ms": 3.78,
+    "max_speed_kmh": 33.3,
+    "avg_speed_kmh": 13.6
+  },
+  {
+    "tracker_id": 6,
+    "team": 1,
+    "num_frames": 743,
+    "total_distance_m": 84.4,
+    "max_speed_ms": 9.79,
+    "avg_speed_ms": 2.97,
+    "max_speed_kmh": 35.3,
+    "avg_speed_kmh": 10.7
+  },
+  {
+    "tracker_id": 4,
+    "team": 0,
+    "num_frames": 742,
+    "total_distance_m": 88.2,
+    "max_speed_ms": 9.94,
+    "avg_speed_ms": 3.09,
+    "max_speed_kmh": 35.8,
+    "avg_speed_kmh": 11.1
+  },
+  {
+    "tracker_id": 5,
+    "team": 0,
+    "num_frames": 733,
+    "total_distance_m": 87.1,
+    "max_speed_ms": 9.8,
+    "avg_speed_ms": 3.02,
+    "max_speed_kmh": 35.3,
+    "avg_speed_kmh": 10.9
+  },
+  {
+    "tracker_id": 8,
+    "team": 1,
+    "num_frames": 741,
+    "total_distance_m": 78.2,
+    "max_speed_ms": 9.52,
+    "avg_speed_ms": 2.76,
+    "max_speed_kmh": 34.3,
+    "avg_speed_kmh": 9.9
+  },
+  {
+    "tracker_id": 9,
+    "team": 0,
+    "num_frames": 746,
+    "total_distance_m": 89.1,
+    "max_speed_ms": 9.86,
+    "avg_speed_ms": 3.09,
+    "max_speed_kmh": 35.5,
+    "avg_speed_kmh": 11.1
+  },
+  {
+    "tracker_id": 10,
+    "team": 0,
+    "num_frames": 32,
+    "total_distance_m": 3.5,
+    "max_speed_ms": 5.13,
+    "avg_speed_ms": 2.75,
+    "max_speed_kmh": 18.5,
+    "avg_speed_kmh": 9.9
+  },
+  {
+    "tracker_id": 15,
+    "team": 1,
+    "num_frames": 743,
+    "total_distance_m": 77.4,
+    "max_speed_ms": 9.66,
+    "avg_speed_ms": 2.74,
+    "max_speed_kmh": 34.8,
+    "avg_speed_kmh": 9.9
+  },
+  {
+    "tracker_id": 14,
+    "team": 0,
+    "num_frames": 747,
+    "total_distance_m": 85.2,
+    "max_speed_ms": 9.95,
+    "avg_speed_ms": 2.88,
+    "max_speed_kmh": 35.8,
+    "avg_speed_kmh": 10.4
+  },
+  {
+    "tracker_id": 11,
+    "team": 1,
+    "num_frames": 747,
+    "total_distance_m": 100.8,
+    "max_speed_ms": 8.95,
+    "avg_speed_ms": 3.49,
+    "max_speed_kmh": 32.2,
+    "avg_speed_kmh": 12.6
+  },
+  {
+    "tracker_id": 13,
+    "team": 0,
+    "num_frames": 747,
+    "total_distance_m": 80.8,
+    "max_speed_ms": 9.81,
+    "avg_speed_ms": 2.8,
+    "max_speed_kmh": 35.3,
+    "avg_speed_kmh": 10.1
+  },
+  {
+    "tracker_id": 12,
+    "team": 0,
+    "num_frames": 745,
+    "total_distance_m": 99.4,
+    "max_speed_ms": 9.3,
+    "avg_speed_ms": 3.42,
+    "max_speed_kmh": 33.5,
+    "avg_speed_kmh": 12.3
+  },
+  {
+    "tracker_id": 16,
+    "team": 0,
+    "num_frames": 746,
+    "total_distance_m": 106.2,
+    "max_speed_ms": 9.87,
+    "avg_speed_ms": 3.71,
+    "max_speed_kmh": 35.5,
+    "avg_speed_kmh": 13.3
+  },
+  {
+    "tracker_id": 17,
+    "team": 1,
+    "num_frames": 742,
+    "total_distance_m": 80.8,
+    "max_speed_ms": 9.96,
+    "avg_speed_ms": 2.75,
+    "max_speed_kmh": 35.8,
+    "avg_speed_kmh": 9.9
+  },
+  {
+    "tracker_id": 18,
+    "team": 0,
+    "num_frames": 742,
+    "total_distance_m": 83.6,
+    "max_speed_ms": 9.98,
+    "avg_speed_ms": 2.96,
+    "max_speed_kmh": 35.9,
+    "avg_speed_kmh": 10.7
+  },
+  {
+    "tracker_id": 3,
+    "team": 1,
+    "num_frames": 354,
+    "total_distance_m": 50.3,
+    "max_speed_ms": 8.91,
+    "avg_speed_ms": 3.46,
+    "max_speed_kmh": 32.1,
+    "avg_speed_kmh": 12.5
+  },
+  {
+    "tracker_id": 20,
+    "team": 0,
+    "num_frames": 290,
+    "total_distance_m": 38.1,
+    "max_speed_ms": 9.13,
+    "avg_speed_ms": 3.28,
+    "max_speed_kmh": 32.9,
+    "avg_speed_kmh": 11.8
+  },
+  {
+    "tracker_id": 21,
+    "team": 1,
+    "num_frames": 350,
+    "total_distance_m": 44.7,
+    "max_speed_ms": 8.74,
+    "avg_speed_ms": 3.3,
+    "max_speed_kmh": 31.5,
+    "avg_speed_kmh": 11.9
+  },
+  {
+    "tracker_id": 22,
+    "team": 0,
+    "num_frames": 11,
+    "total_distance_m": 0.8,
+    "max_speed_ms": 7.05,
+    "avg_speed_ms": 1.7,
+    "max_speed_kmh": 25.4,
+    "avg_speed_kmh": 6.1
+  },
+  {
+    "tracker_id": 19,
+    "team": 1,
+    "num_frames": 2,
+    "total_distance_m": 0.0,
+    "max_speed_ms": 0.71,
+    "avg_speed_ms": 0.71,
+    "max_speed_kmh": 2.5,
+    "avg_speed_kmh": 2.5
+  },
+  {
+    "tracker_id": 23,
+    "team": 1,
+    "num_frames": 139,
+    "total_distance_m": 20.9,
+    "max_speed_ms": 8.71,
+    "avg_speed_ms": 3.54,
+    "max_speed_kmh": 31.4,
+    "avg_speed_kmh": 12.7
+  },
+  {
+    "tracker_id": 25,
+    "team": 0,
+    "num_frames": 72,
+    "total_distance_m": 14.5,
+    "max_speed_ms": 9.84,
+    "avg_speed_ms": 5.12,
+    "max_speed_kmh": 35.4,
+    "avg_speed_kmh": 18.4
+  },
+  {
+    "tracker_id": 26,
+    "team": 0,
+    "num_frames": 661,
+    "total_distance_m": 93.6,
+    "max_speed_ms": 9.74,
+    "avg_speed_ms": 3.57,
+    "max_speed_kmh": 35.1,
+    "avg_speed_kmh": 12.9
+  },
+  {
+    "tracker_id": 27,
+    "team": 0,
+    "num_frames": 661,
+    "total_distance_m": 85.5,
+    "max_speed_ms": 7.94,
+    "avg_speed_ms": 3.24,
+    "max_speed_kmh": 28.6,
+    "avg_speed_kmh": 11.7
+  },
+  {
+    "tracker_id": 28,
+    "team": 0,
+    "num_frames": 641,
+    "total_distance_m": 87.8,
+    "max_speed_ms": 9.16,
+    "avg_speed_ms": 3.47,
+    "max_speed_kmh": 33.0,
+    "avg_speed_kmh": 12.5
+  },
+  {
+    "tracker_id": 29,
+    "team": 0,
+    "num_frames": 209,
+    "total_distance_m": 26.5,
+    "max_speed_ms": 9.88,
+    "avg_speed_ms": 3.14,
+    "max_speed_kmh": 35.6,
+    "avg_speed_kmh": 11.3
+  },
+  {
+    "tracker_id": 30,
+    "team": 1,
+    "num_frames": 420,
+    "total_distance_m": 59.7,
+    "max_speed_ms": 9.66,
+    "avg_speed_ms": 3.59,
+    "max_speed_kmh": 34.8,
+    "avg_speed_kmh": 12.9
+  },
+  {
+    "tracker_id": 31,
+    "team": 0,
+    "num_frames": 343,
+    "total_distance_m": 55.1,
+    "max_speed_ms": 9.91,
+    "avg_speed_ms": 4.19,
+    "max_speed_kmh": 35.7,
+    "avg_speed_kmh": 15.1
+  },
+  {
+    "tracker_id": 35,
+    "team": 0,
+    "num_frames": 11,
+    "total_distance_m": 0.7,
+    "max_speed_ms": 3.02,
+    "avg_speed_ms": 1.54,
+    "max_speed_kmh": 10.9,
+    "avg_speed_kmh": 5.5
+  }
+]

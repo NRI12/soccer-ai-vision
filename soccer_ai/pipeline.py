@@ -25,6 +25,8 @@ from soccer_ai.detector import (
     filter_detections,
     track,
     classify_teams,
+    classify_teams_kmeans,
+    KMeansTeamClassifier,
     _REFEREE_CLASS,
 )
 from soccer_ai.calibration import NBJWCalibrator, transform_detections, PositionSmoother
@@ -49,6 +51,7 @@ def process_frame(
     pos_smoother: PositionSmoother | None = None,
     calibrator: NBJWCalibrator | None = None,
     reid: PlayerReID | None = None,
+    team_classifier: KMeansTeamClassifier | None = None,
 ) -> FrameData:
     """Run all enabled pipeline stages on a single frame."""
     if not cfg.detect.enabled:
@@ -71,6 +74,8 @@ def process_frame(
     if cfg.team.enabled:
         if not cfg.filter.enabled:
             log.warning("Team classification requires filter stage. Skipping.")
+        elif getattr(cfg.team, "mode", "from_model") == "from_color" and team_classifier is not None:
+            data = classify_teams_kmeans(data, team_classifier)
         else:
             data = classify_teams(data)
     elif cfg.filter.enabled and "all_detections" in data:

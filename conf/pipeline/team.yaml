@@ -1,6 +1,8 @@
 # @package _global_
 team:
   enabled: true
-  # Detector (SoccerNet 8-class) đã encode team-left / team-right trực tiếp.
-  # classify_teams_from_model() chỉ remap class_ids → {0, 1, 2}.
-  mode: from_model
+  # from_model : dùng class_id từ YOLO (player_left / player_right)
+  # from_color : KMeans k=2 trên màu áo (LAB), tự động, không cần nhãn model
+  mode: from_color
+  kmeans_warmup_frames: 60   # tích lũy bao nhiêu frame trước khi fit lần đầu
+  kmeans_min_crop_h: 30      # bỏ qua crop quá nhỏ (pixel)
